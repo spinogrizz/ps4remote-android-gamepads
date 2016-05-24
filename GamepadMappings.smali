@@ -14,6 +14,9 @@
 
 .field private static final SAMSUNG_EI_GP20_DEVICE_NAME:Ljava/lang/String; = "Samsung Game Pad EI-GP20"
 
+# Moga Hero Power or other Moga gamepad
+.field private static final MOGA_PRO_HID_DEVICE_NAME:Ljava/lang/String; = "Moga 2 HID"
+
 .field private static ps4KeylayoutExists:Z
 
 
@@ -1435,7 +1438,27 @@
     goto :goto_0
 
     .line 1284
-    :cond_5
+
+    # begin MoGa gamepad check
+        :cond_5
+        const-string v1, "Moga 2 HID"
+
+        .local v1, "v1":Ljava/lang/Object;
+        invoke-virtual {p3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+        move-result v1
+
+        .local v1, "v1":Z
+        if-eqz v1, :cond_6
+
+        invoke-static {p0, p2, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapMogaGamepad(Ljava/util/EnumMap;[F[F)V
+
+        goto :goto_0
+    #end MoGa gamepad check
+
+
+    .line 1284
+    :cond_6
     invoke-static {p0, p2, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapUnknownGamepad(Ljava/util/EnumMap;[F[F)V
 
     .line 1287
@@ -1535,24 +1558,52 @@
     invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonStartSelectMetaButtons(Ljava/util/EnumMap;[F)V
 
     .line 1378
-    # modified l2/r2 trigger
-    # invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapTriggerAxes(Ljava/util/EnumMap;[F)V
-    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapBrakeAndGasToTriggers(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapTriggerAxes(Ljava/util/EnumMap;[F)V
 
     .line 1381
-    # modified dpad
-    # invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonDpadButtons(Ljava/util/EnumMap;[F)V
-    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapHatAxisToDpadButtons(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonDpadButtons(Ljava/util/EnumMap;[F)V
 
     .line 1384
     invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapXYAxes(Ljava/util/EnumMap;[F)V
 
     .line 1387
-    # modified right stick
-    # invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapRXAndRYAxesToRightStick(Ljava/util/EnumMap;[F)V
-    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapZAndRZAxesToRightStick(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapRXAndRYAxesToRightStick(Ljava/util/EnumMap;[F)V
 
     .line 1390
+    return-void
+.end method
+
+.method private static mapMogaGamepad(Ljava/util/EnumMap;[F[F)V
+    .locals 0
+    .param p1, "arrf"    # [F
+    .param p2, "arrf2"    # [F
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/util/EnumMap",
+            "<",
+            "Lcom/playstation/remoteplay/ButtonIndex;",
+            "Ljava/lang/Float;",
+            ">;[F[F)V"
+        }
+    .end annotation
+
+    .prologue
+    invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonXYABButtons(Ljava/util/EnumMap;[F)V
+
+    invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonShoulderButtons(Ljava/util/EnumMap;[F)V
+
+    invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonThumbstickButtons(Ljava/util/EnumMap;[F)V
+
+    invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonStartSelectMetaButtons(Ljava/util/EnumMap;[F)V
+
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapXYAxes(Ljava/util/EnumMap;[F)V
+
+    # specific to MoGa
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapBrakeAndGasToTriggers(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapHatAxisToDpadButtons(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapZAndRZAxesToRightStick(Ljava/util/EnumMap;[F)V
+
     return-void
 .end method
 
