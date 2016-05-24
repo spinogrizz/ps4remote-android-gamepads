@@ -1535,16 +1535,22 @@
     invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonStartSelectMetaButtons(Ljava/util/EnumMap;[F)V
 
     .line 1378
-    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapTriggerAxes(Ljava/util/EnumMap;[F)V
+    # modified l2/r2 trigger
+    # invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapTriggerAxes(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapBrakeAndGasToTriggers(Ljava/util/EnumMap;[F)V
 
     .line 1381
-    invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonDpadButtons(Ljava/util/EnumMap;[F)V
+    # modified dpad
+    # invoke-static {p0, p1}, Lcom/playstation/remoteplay/GamepadMappings;->mapCommonDpadButtons(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapHatAxisToDpadButtons(Ljava/util/EnumMap;[F)V
 
     .line 1384
     invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapXYAxes(Ljava/util/EnumMap;[F)V
 
     .line 1387
-    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapRXAndRYAxesToRightStick(Ljava/util/EnumMap;[F)V
+    # modified right stick
+    # invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapRXAndRYAxesToRightStick(Ljava/util/EnumMap;[F)V
+    invoke-static {p0, p2}, Lcom/playstation/remoteplay/GamepadMappings;->mapZAndRZAxesToRightStick(Ljava/util/EnumMap;[F)V
 
     .line 1390
     return-void
