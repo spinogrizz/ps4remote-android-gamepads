@@ -14,8 +14,11 @@
 
 .field private static final SAMSUNG_EI_GP20_DEVICE_NAME:Ljava/lang/String; = "Samsung Game Pad EI-GP20"
 
-# Moga Hero Power or other Moga gamepad
-.field private static final MOGA_PRO_HID_DEVICE_NAME:Ljava/lang/String; = "Moga 2 HID"
+# MOGA Hero Power 
+.field private static final MOGA_HERO_HID_DEVICE_NAME:Ljava/lang/String; = "Moga 2 HID"
+
+# MOGA Pro Power 
+.field private static final MOGA_PRO_HID_DEVICE_NAME:Ljava/lang/String; = "Moga Pro 2 HID"
 
 .field private static ps4KeylayoutExists:Z
 
@@ -1441,10 +1444,10 @@
 
     # begin MoGa gamepad check
         :cond_5
-        const-string v1, "Moga 2 HID"
+        const-string v1, "Moga "
 
         .local v1, "v1":Ljava/lang/Object;
-        invoke-virtual {p3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+        invoke-virtual {p3, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
 
         move-result v1
 
