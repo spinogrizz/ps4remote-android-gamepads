@@ -14,5 +14,7 @@ This project is devoted to bring support for more various gamepad models, such a
 * Moga Pro Power
 * ... etc
 
-Demo video: https://www.youtube.com/watch?v=n9SYC35Vmek
-APK download: http://bit.ly/1NJZxOQ
+
+#### Some extra files
+* Demo video: https://www.youtube.com/watch?v=n9SYC35Vmek
+* APK download: http://bit.ly/1NJZxOQ
